@@ -16,10 +16,15 @@
 (setq load-path (cons "~/.emacs.d/elisp" load-path))
 (setq load-path (cons "~/.emacs.d/elisp/apel" load-path))
 
+;; js2-mode
+(autoload 'js2-mode "js2" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
 ;;; タブ幅の設定
 (setq-default tab-width 4 indent-tabs-mode nil)
 (setq-default perl-basic-offset 4)
 (setq-default html-basic-offset 2)
+(setq-default js2-basic-offset  2)
 
 (add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\|t\\|cgi\\|psgi\\)\\'" . perl-mode))
 (add-to-list 'interpreter-mode-alist '("perl" . perl-mode))
