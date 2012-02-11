@@ -20,6 +20,14 @@
 (autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
+;; less-mode
+(require 'less-css-mode)
+(add-to-list 'auto-mode-alist '("\\.less$" . less-css-mode))
+
+;; xs-mode
+(require 'xs-mode)
+(add-to-list 'auto-mode-alist '("\\.xs$" . xs-mode))
+
 ;;; タブ幅の設定
 (setq-default tab-width 4 indent-tabs-mode nil)
 (setq-default perl-basic-offset 4)
