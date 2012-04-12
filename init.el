@@ -3,14 +3,40 @@
 ;; UTF-8 and Japanese Setting
 (set-language-environment "Japanese")
 (set-terminal-coding-system 'utf-8)
-(setq file-name-coding-system 'utf-8)
-(set-clipboard-coding-system 'utf-8)
-(setq default-buffer-file-coding-system 'utf-8)
-(prefer-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-buffer-file-coding-system 'utf-8-unix)
+(setq default-buffer-file-coding-system 'utf-8-unix)
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(setq file-name-coding-system 'utf-8)
+(set-clipboard-coding-system 'utf-8)
+
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+
 (setq default-input-method 'japanese-anthy)
+
+;;; East Asian ambiguous char width問題対策
+(utf-translate-cjk-set-unicode-range
+ '((#x00a2 . #x00a3)                    ; ¢, £
+   (#x00a7 . #x00a8)                    ; §, ¨
+   (#x00ac . #x00ac)                    ; ¬
+   (#x00b0 . #x00b1)                    ; °, ±
+   (#x00b4 . #x00b4)                    ; ´
+   (#x00b6 . #x00b6)                    ; ¶
+   (#x00d7 . #x00d7)                    ; ×
+   (#X00f7 . #x00f7)                    ; ÷
+   (#x0370 . #x03ff)                    ; Greek and Coptic
+   (#x0400 . #x04FF)                    ; Cyrillic
+   (#x2000 . #x206F)                    ; General Punctuation
+   (#x2100 . #x214F)                    ; Letterlike Symbols
+   (#x2190 . #x21FF)                    ; Arrows
+   (#x2200 . #x22FF)                    ; Mathematical Operators
+   (#x2300 . #x23FF)                    ; Miscellaneous Technical
+   (#x2500 . #x257F)                    ; Box Drawing
+   (#x25A0 . #x25FF)                    ; Geometric Shapes
+   (#x2600 . #x26FF)                    ; Miscellaneous Symbols
+   (#x2e80 . #xd7a3) (#xff00 . #xffef)))
 
 ;;; emacs lisp を読み込む
 (setq load-path (cons "~/.emacs.d/elisp" load-path))
@@ -32,8 +58,19 @@
 (require 'kolon-mode)
 (add-to-list 'auto-mode-alist '("\\.tx$" . kolon-mode))
 
+;; php-mode
+(autoload 'php-mode "php-mode")
+(setq auto-mode-alist
+      (cons '("\\.php\\'" . php-mode) auto-mode-alist))
+(setq php-mode-force-pear t)
+(add-hook 'php-mode-user-hook
+  '(lambda ()
+     (setq php-manual-path "/usr/local/share/php/doc/html")
+     (setq php-manual-url "http://www.phppro.jp/phpmanual/")))
+
 ;;; タブ幅の設定
-(setq-default tab-width 4 indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq-default indent-tabs-mode nil)
 (setq-default perl-basic-offset 4)
 (setq-default html-basic-offset 2)
 (setq-default js2-basic-offset  2)
@@ -42,6 +79,27 @@
 (add-to-list 'interpreter-mode-alist '("perl" . perl-mode))
 (add-to-list 'interpreter-mode-alist '("perl5" . perl-mode))
 (add-to-list 'interpreter-mode-alist '("miniperl" . perl-mode))
+
+;; タブ、全角スペースを光らせる
+(defface my-face-r-1 '((t (:background "gray15"))) nil)
+(defface my-face-b-1 '((t (:background "gray"))) nil)
+(defface my-face-b-2 '((t (:background "gray26"))) nil)
+(defface my-face-u-1 '((t (:foreground "red" :underline t))) nil)
+(defvar my-face-r-1 'my-face-r-1)
+(defvar my-face-b-1 'my-face-b-1)
+(defvar my-face-b-2 'my-face-b-2)
+(defvar my-face-u-1 'my-face-u-1)
+(defadvice font-lock-mode (before my-font-lock-mode())
+  (font-lock-add-keywords
+   major-mode
+   '(
+     ("\t" 0 my-face-b-2 append)
+     ("　" 0 my-face-b-2 append)
+     ("[ \t]+$" 0 my-face-u-1 append)
+     (" [\r]*\n" 0 my-face-r-1 append)
+     )))
+(ad-enable-advice 'font-lock-mode 'before 'my-font-lock-mode)
+(ad-activate 'font-lock-mode)
 
 ;;; 対応する括弧を光らせる。
 (show-paren-mode 1)
@@ -107,62 +165,3 @@
     (car grep-command)))
 (setq grep-command (cons (concat grep-command-before-query " .")
                          (+ (length grep-command-before-query) 1)))
-
-; perl tidy
-; sudo aptitude install perltidy
-(defun perltidy-region ()
-  "Run perltidy on the current region."
-  (interactive)
-  (save-excursion
-    (shell-command-on-region (point) (mark) "perltidy -q" nil t)))
-(defun perltidy-defun ()
-  "Run perltidy on the current defun."
-  (interactive)
-  (save-excursion (mark-defun)
-                  (perltidy-region)))
-(global-set-key "\C-ct" 'perltidy-region)
-(global-set-key "\C-c\C-t" 'perltidy-defun)
-
-;; flymake for perl
-(defvar flymake-perl-err-line-patterns '(("\\(.*\\) at \\([^ \n]+\\) line \\([0-9]+\\)[,.\n]" 2 3 nil 1)))
-(defconst flymake-allowed-perl-file-name-masks '(("\\.pl$" flymake-perl-init)
-                                               ("\\.pm$" flymake-perl-init)
-                                               ("\\.t$" flymake-perl-init)
-                                               ))
-
-(defun flymake-perl-init ()
-  (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                     'flymake-create-temp-inplace))
-         (local-file (file-relative-name
-                      temp-file
-                      (file-name-directory buffer-file-name))))
-    (list "perl" (list "-wc" local-file))))
-
-(defun flymake-perl-load ()
-  (interactive)
-  (set-perl5lib)
-  (defadvice flymake-post-syntax-check (before flymake-force-check-was-interrupted)
-    (setq flymake-check-was-interrupted t))
-  (ad-activate 'flymake-post-syntax-check)
-  (setq flymake-allowed-file-name-masks (append flymake-allowed-file-name-masks flymake-allowed-perl-file-name-masks))
-  (setq flymake-err-line-patterns flymake-perl-err-line-patterns)
-  (flymake-mode t))
-
-(add-hook 'perl-mode-hook '(lambda () (flymake-perl-load)))
-
-(defun next-flymake-error ()
-  (interactive)
-  (flymake-goto-next-error)
-  (let ((err (get-char-property (point) 'help-echo)))
-    (when err
-      (message err))))
-(global-set-key "\C-ce" 'next-flymake-error)
-
-(autoload 'php-mode "php-mode")
-(setq auto-mode-alist
-      (cons '("\\.php\\'" . php-mode) auto-mode-alist))
-(setq php-mode-force-pear t)
-(add-hook 'php-mode-user-hook
-  '(lambda ()
-     (setq php-manual-path "/usr/local/share/php/doc/html")
-     (setq php-manual-url "http://www.phppro.jp/phpmanual/")))
