@@ -28,6 +28,10 @@
 (require 'xs-mode)
 (add-to-list 'auto-mode-alist '("\\.xs$" . xs-mode))
 
+;; kolon-mode
+(require 'kolon-mode)
+(add-to-list 'auto-mode-alist '("\\.tx$" . kolon-mode))
+
 ;;; タブ幅の設定
 (setq-default tab-width 4 indent-tabs-mode nil)
 (setq-default perl-basic-offset 4)
