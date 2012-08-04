@@ -27,6 +27,10 @@
 (require 'kolon-mode)
 (add-to-list 'auto-mode-alist '("\\.tx$" . kolon-mode))
 
+;; jsx-mode
+(require 'jsx-mode)
+(add-to-list 'auto-mode-alist '("\\.jsx$" . jsx-mode))
+
 ;;; タブ幅の設定
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
