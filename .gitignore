@@ -1,2 +1,4 @@
 auto-save-list
 *.elc
+vendor/elpa/archives/gnu/archive-contents
+vendor/elpa/archives/marmalade/archive-contents
