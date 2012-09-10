@@ -31,6 +31,9 @@
 (require 'jsx-mode)
 (add-to-list 'auto-mode-alist '("\\.jsx$" . jsx-mode))
 
+;; align.el
+(require 'align)
+
 ;;; タブ幅の設定
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
