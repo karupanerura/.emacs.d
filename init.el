@@ -10,14 +10,9 @@
 (set-default-coding-systems 'utf-8)
 (setq file-name-coding-system 'utf-8)
 (set-clipboard-coding-system 'utf-8)
-
-(prefer-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-
 (setq default-input-method 'japanese-anthy)
 
 (setq load-path (cons "~/.emacs.d/elisp" load-path))
-(setq load-path (cons "~/.emacs.d/elisp/apel" load-path))
 
 ;; xs-mode
 (require 'xs-mode)
@@ -92,6 +87,15 @@
 
 ;;; diredを便利にする
 (require 'dired-x)
+
+;; install-elisp.el
+(require 'install-elisp)
+(setq install-elisp-repository-directory "~/.emacs.d/elisp")
+
+;; auto-async-byte-compile
+(require 'auto-async-byte-compile)
+(setq auto-async-byte-compile-execlude-files-regexp "/tmp/auto-async-byte-compile")
+(add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
 
 ;; package.el
 (require 'package)
