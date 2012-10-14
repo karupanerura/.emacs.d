@@ -92,10 +92,26 @@
 (require 'install-elisp)
 (setq install-elisp-repository-directory "~/.emacs.d/elisp")
 
-;; auto-async-byte-compile
+;; auto-async-byte-compile.el
 (require 'auto-async-byte-compile)
 (setq auto-async-byte-compile-execlude-files-regexp "/tmp/auto-async-byte-compile")
 (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
+
+;; server.el
+(require 'server)
+(unless (server-running-p)
+  (server-start)
+  (iconify-frame)
+)
+(defun iconify-emacs-when-server-is-done()
+  (unless server-clients (iconify-frame)))
+(add-hook 'server-done-hook 'iconify-emacs-when-server-is-done)
+
+;; C-x C-cで出る
+(global-set-key (kbd "C-x C-c") 'server-edit)
+
+;; M-x exitで終了
+(defalias 'exit 'save-buffers-kill-emacs)
 
 ;; package.el
 (require 'package)
