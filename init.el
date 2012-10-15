@@ -97,6 +97,15 @@
 (setq auto-async-byte-compile-execlude-files-regexp "/tmp/auto-async-byte-compile")
 (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
 
+;; tempbuf.el
+(require 'tempbuf)
+(add-hook 'dired-mode-hook 'turn-on-tempbuf-mode)
+(add-hook 'find-file-hook 'turn-on-tempbuf-mode)
+
+;; auto-save-buffers.el
+(require 'auto-save-buffers)
+(run-with-idle-timer 10 t 'auto-save-buffers)
+
 ;; server.el
 (require 'server)
 (unless (server-running-p)
