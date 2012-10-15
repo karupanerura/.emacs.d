@@ -29,6 +29,63 @@
 ;; align.el
 (require 'align)
 
+;; flymake
+(require 'flymake)
+
+;; set-perl5lib.el
+(require 'set-perl5lib)
+
+;; flymake-error-format
+(set-face-background 'flymake-errline "red4")
+(set-face-foreground 'flymake-errline "black")
+(set-face-background 'flymake-warnline "yellow")
+(set-face-foreground 'flymake-warnline "black")
+;; http://d.hatena.ne.jp/xcezx/20080314/1205475020
+(defun flymake-display-err-minibuf ()
+  "Displays the error/warning for the current line in the minibuffer"
+  (interactive)
+  (let* ((line-no             (flymake-current-line-no))
+         (line-err-info-list  (nth 0 (flymake-find-err-info flymake-err-info line-no)))
+         (count               (length line-err-info-list)))
+    (while (> count 0)
+      (when line-err-info-list
+        (let* ((file       (flymake-ler-file (nth (1- count) line-err-info-list)))
+               (full-file  (flymake-ler-full-file (nth (1- count) line-err-info-list)))
+               (text (flymake-ler-text (nth (1- count) line-err-info-list)))
+               (line       (flymake-ler-line (nth (1- count) line-err-info-list))))
+          (message "[%s] %s" line text)))
+      (setq count (1- count)))))
+
+;; flymake for perl
+;; http://unknownplace.org/memo/2007/12/21#e001
+(defvar flymake-perl-err-line-patterns
+  '(("\\(.*\\) at \\([^ \n]+\\) line \\([0-9]+\\)[,.\n]" 2 3 nil 1)))
+(defconst flymake-allowed-perl-file-name-masks
+  '(("\\.pl$"    flymake-perl-init)
+    ("\\.pm$"   flymake-perl-init)
+    ("\\.psgi$" flymake-perl-init)
+    ("\\.t$"    flymake-perl-init)))
+(defun flymake-perl-init ()
+  (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                     'flymake-create-temp-inplace))
+         (local-file (file-relative-name
+                      temp-file
+                      (file-name-directory buffer-file-name))))
+    (list "perl" (list "-wc" local-file))))
+(defun flymake-perl-load ()
+  (interactive)
+  (defadvice flymake-post-syntax-check (before flymake-force-check-was-interrupted)
+    (setq flymake-check-was-interrupted t))
+  (ad-activate 'flymake-post-syntax-check)
+  (setq flymake-allowed-file-name-masks (append flymake-allowed-file-name-masks flymake-allowed-perl-file-name-masks))
+  (setq flymake-err-line-patterns flymake-perl-err-line-patterns)
+  (set-perl5lib)
+  (flymake-mode t))
+(add-hook 'perl-mode-hook 'flymake-perl-load)
+
+;; auto start flymake
+(add-hook 'find-file-hook 'flymake-mode)
+
 ;;; タブ幅の設定
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
