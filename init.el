@@ -84,7 +84,7 @@
 (add-hook 'perl-mode-hook 'flymake-perl-load)
 
 ;; auto start flymake
-(add-hook 'find-file-hook 'flymake-mode)
+(add-hook 'find-file-hook 'flymake-find-file-hook)
 
 ;;; タブ幅の設定
 (setq-default tab-width 4)
