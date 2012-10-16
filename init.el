@@ -26,6 +26,17 @@
 (require 'jsx-mode)
 (add-to-list 'auto-mode-alist '("\\.jsx$" . jsx-mode))
 
+;; pod-mode
+(require 'pod-mode)
+(add-to-list 'auto-mode-alist
+             '("\\.pod$" . pod-mode))
+(add-hook 'pod-mode-hook
+          '(lambda () (progn
+                        (font-lock-mode)
+                        (auto-fill-mode 1)
+                        (flyspell-mode 1)
+                        )))
+
 ;; align.el
 (require 'align)
 
@@ -144,6 +155,27 @@
 
 ;;; diredを便利にする
 (require 'dired-x)
+
+;; perldoc -lm した結果を開く
+(defun  perl-find-module ()
+  (interactive)
+  (let
+      (end begin module path-to-module)
+    (save-excursion
+      (setq begin (save-excursion (skip-chars-backward "a-zA-Z0-9_:") (point)))
+      (setq end (save-excursion (skip-chars-forward "a-zA-Z0-9_:") (point)))
+      (setq module (buffer-substring begin end))
+      )
+    (shell-command (concat "perldoc -lm " module) "*perldoc*")
+    (save-window-excursion
+      (switch-to-buffer "*perldoc*")
+      (setq end (point))
+      (setq begin (save-excursion (beginning-of-line) (point)))
+      (setq path-to-module (buffer-substring begin end))
+      )
+    (message path-to-module)
+    (find-file path-to-module)
+))
 
 ;; install-elisp.el
 (require 'install-elisp)
