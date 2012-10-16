@@ -22,6 +22,17 @@
 (require 'kolon-mode)
 (add-to-list 'auto-mode-alist '("\\.tx$" . kolon-mode))
 
+;; tt-mode
+(require 'tt-mode)
+
+;; html-tt-mode
+(autoload 'html-helper-mode "html-helper-mode" "Yay HTML" t)
+(setq auto-mode-alist
+      (cons
+       '("\\.html$" . html-helper-mode) auto-mode-alist))
+(require 'html-tt)
+(add-hook 'html-helper-mode-hook 'html-tt-load-hook)
+
 ;; jsx-mode
 (require 'jsx-mode)
 (add-to-list 'auto-mode-alist '("\\.jsx$" . jsx-mode))
