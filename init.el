@@ -40,6 +40,9 @@
 ;; align.el
 (require 'align)
 
+;; tramp
+(require 'tramp)
+
 ;; flymake
 (require 'flymake)
 
