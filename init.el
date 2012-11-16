@@ -33,6 +33,15 @@
 ;;インストールしたパッケージにロードパスを通してロードする
 (package-initialize)
 
+;; perl-mode
+(add-to-list 'auto-mode-alist '("\\.[pP][LlMm]$" . perl-mode))
+(add-to-list 'auto-mode-alist '("\\.t$" . perl-mode))
+(add-to-list 'auto-mode-alist '("\\.cgi$" . perl-mode))
+(add-to-list 'auto-mode-alist '("\\.psgi$" . perl-mode))
+(add-to-list 'interpreter-mode-alist '("perl" . perl-mode))
+(add-to-list 'interpreter-mode-alist '("perl5" . perl-mode))
+(add-to-list 'interpreter-mode-alist '("miniperl" . perl-mode))
+
 ;; xs-mode
 (require 'xs-mode)
 (add-to-list 'auto-mode-alist '("\\.xs$" . xs-mode))
@@ -55,6 +64,109 @@
 ;; jsx-mode
 (require 'jsx-mode)
 (add-to-list 'auto-mode-alist '("\\.jsx$" . jsx-mode))
+
+;; apache-mode(from package.el)
+(add-to-list 'auto-mode-alist '("apache/conf/.+?\\.conf$" . apache-mode))
+(add-to-list 'auto-mode-alist '("dev/apache\\.conf$" . apache-mode))
+(add-to-list 'auto-mode-alist '("apache/[0-9.]+\\.conf$" . apache-mode))
+(add-to-list 'auto-mode-alist '("apache-local\\.conf$" . apache-mode))
+
+;; gitconfig-mode(from package.el)
+(add-to-list 'auto-mode-alist '("git/config$" . gitconfig-mode))
+(add-to-list 'auto-mode-alist '("\\.gitconfig$" . gitconfig-mode))
+
+;; crontab-mode(from package.el)
+(add-to-list 'auto-mode-alist '("crontab/[^/]+$" . crontab-mode))
+(add-to-list 'auto-mode-alist '("cron.d/[^/]+$" . crontab-mode))
+(add-to-list 'auto-mode-alist '("crontab$" . crontab-mode))
+
+;; js2-mode(from package.el)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
+;; nginx-mode(from package.el)
+(add-to-list 'auto-mode-alist '("nginx/[^/]+$" . nginx-mode))
+(add-to-list 'auto-mode-alist '("nginx/conf/[^/]+$" . nginx-mode))
+
+;; php-mode(from package.el)
+(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
+
+;; go-mode(from package.el)
+(add-to-list 'auto-mode-alist '("\\.go$" . go-mode))
+
+;; haml-mode(from package.el)
+(add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode))
+
+;; haskell-mode(from package.el)
+(add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
+
+;; python-mode(from package.el)
+(add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
+
+;; lua-mode(from package.el)
+(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+
+;; less-css-mode(from package.el)
+(add-to-list 'auto-mode-alist '("\\.less$" . less-css-mode))
+
+;; sass-mode(from package.el)
+(add-to-list 'auto-mode-alist '("\\.sass$" . sass-mode))
+
+;; scss-mode(from package.el)
+(add-to-list 'auto-mode-alist '("\\.scss$" . scss-mode))
+
+;; scala-mode(from package.el)
+(add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode))
+
+;; ssh-config-mode(from package.el)
+(add-to-list 'auto-mode-alist '("\\.ssh/config$" . ssh-config-mode))
+(add-to-list 'auto-mode-alist '("ssh/ssh_config$" . ssh-config-mode))
+
+;; yaml-mode(from package.el)
+(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+
+;; zencoding-mode(from package.el)
+(when (require 'zencoding-mode nil t)
+  (setq zencoding-block-tags
+        (append (list
+                 "article"
+                 "section"
+                 "aside"
+                 "nav"
+                 "figure"
+                 "address"
+                 "header"
+                 "footer")
+                zencoding-block-tags))
+  (setq zencoding-inline-tags
+        (append (list
+                 "textarea"
+                 "small"
+                 "time" "del" "ins"
+                 "sub"
+                 "sup"
+                 "i" "s" "b"
+                 "ruby" "rt" "rp"
+                 "bdo"
+                 "iframe" "canvas"
+                 "audio" "video"
+                 "ovject" "embed"
+                 "map"
+                 )
+                zencoding-inline-tags))
+  (setq zencoding-self-closing-tags
+        (append (list
+                 "wbr"
+                 "object"
+                 "source"
+                 "area"
+                 "param"
+                 "option"
+                 )
+                zencoding-self-closing-tags))
+  (add-hook 'html-helper-mode-hook 'zencoding-mode)
+  (define-key zencoding-mode-keymap (kbd "C-c C-m") 'zencoding-expand-yas)
+)
 
 ;; pod-mode
 (require 'pod-mode)
@@ -162,11 +274,6 @@ makes)."
 (setq-default perl-basic-offset 4)
 (setq-default html-basic-offset 2)
 (setq-default js2-basic-offset  2)
-
-(add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\|t\\|cgi\\|psgi\\)\\'" . perl-mode))
-(add-to-list 'interpreter-mode-alist '("perl" . perl-mode))
-(add-to-list 'interpreter-mode-alist '("perl5" . perl-mode))
-(add-to-list 'interpreter-mode-alist '("miniperl" . perl-mode))
 
 ;; タブ、全角スペースを光らせる
 (defface my-face-r-1 '((t (:background "gray15"))) nil)
