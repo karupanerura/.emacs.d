@@ -23,7 +23,8 @@
 ;; package.el
 (require 'package)
 
-;;リポジトリにMarmaladeを追加
+;;リポジトリにMelpa/Marmaladeを追加
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 ;;インストールするディレクトリを指定
