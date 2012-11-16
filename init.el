@@ -20,6 +20,12 @@
 ;; 問い合わせを簡略化 yes/no を y/n
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;; auto-install.el
+(require 'auto-install)
+(setq auto-install-directory "~/.emacs.d/elisp")
+(auto-install-update-emacswiki-package-name t)
+(auto-install-compatibility-setup)
+
 ;; package.el
 (require 'package)
 
@@ -342,10 +348,6 @@ makes)."
     (message path-to-module)
     (find-file path-to-module)
 ))
-
-;; install-elisp.el
-(require 'install-elisp)
-(setq install-elisp-repository-directory "~/.emacs.d/elisp")
 
 ;; auto-async-byte-compile.el
 (require 'auto-async-byte-compile)
