@@ -253,6 +253,10 @@ makes)."
 (require 'auto-save-buffers)
 (run-with-idle-timer 10 t 'auto-save-buffers)
 
+;; yascroll.el(from package.el)
+(require 'yascroll)
+(global-yascroll-bar-mode 1)
+
 ;; yasnippet.el(from package.el)
 (setq yas/jit-compile-dir "~/emacs.d/yas-jit")
 (setq yas/compile-directory "~/emacs.d/tmp/yasnippet")
