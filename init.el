@@ -16,6 +16,22 @@
 
 (setq temporary-file-directory "~/.emacs.d/tmp")
 
+(require 'cl)
+;; 問い合わせを簡略化 yes/no を y/n
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; package.el
+(require 'package)
+
+;;リポジトリにMarmaladeを追加
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+
+;;インストールするディレクトリを指定
+(setq package-user-dir (concat user-emacs-directory "vendor/elpa"))
+
+;;インストールしたパッケージにロードパスを通してロードする
+(package-initialize)
+
 ;; xs-mode
 (require 'xs-mode)
 (add-to-list 'auto-mode-alist '("\\.xs$" . xs-mode))
@@ -237,6 +253,15 @@ makes)."
 (require 'auto-save-buffers)
 (run-with-idle-timer 10 t 'auto-save-buffers)
 
+;; yasnippet.el(from package.el)
+(setq yas/jit-compile-dir "~/emacs.d/yas-jit")
+(setq yas/compile-directory "~/emacs.d/tmp/yasnippet")
+(yas-global-mode 1)
+(custom-set-variables '(yas-trigger-key "TAB"))
+(define-key yas-minor-mode-map (kbd "C-x : i") 'yas-insert-snippet)
+(define-key yas-minor-mode-map (kbd "C-x : n") 'yas-new-snippet)
+(define-key yas-minor-mode-map (kbd "C-x : v") 'yas-visit-snippet-file)
+
 ;; server.el
 (require 'server)
 (unless (server-running-p)
@@ -248,19 +273,10 @@ makes)."
 (add-hook 'server-done-hook 'iconify-emacs-when-server-is-done)
 
 ;; C-x C-cで出る
-(global-set-key (kbd "C-x C-c") 'server-edit)
+(define-key ctl-x-map (kbd "C-c") 'server-edit)
+
+;; C-lでundo
+(global-set-key (kbd "C-l") 'undo)
 
 ;; M-x exitで終了
 (defalias 'exit 'save-buffers-kill-emacs)
-
-;; package.el
-(require 'package)
-
-;;リポジトリにMarmaladeを追加
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-
-;;インストールするディレクトリを指定
-(setq package-user-dir (concat user-emacs-directory "vendor/elpa"))
-
-;;インストールしたパッケージにロードパスを通してロードする
-(package-initialize)
