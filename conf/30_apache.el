@@ -1,0 +1,5 @@
+;; apache-mode(from package.el)
+(add-to-list 'auto-mode-alist '("apache/conf/.+?\\.conf$" . apache-mode))
+(add-to-list 'auto-mode-alist '("dev/apache\\.conf$" . apache-mode))
+(add-to-list 'auto-mode-alist '("apache/[0-9.]+\\.conf$" . apache-mode))
+(add-to-list 'auto-mode-alist '("apache-local\\.conf$" . apache-mode))
