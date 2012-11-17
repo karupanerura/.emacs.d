@@ -52,6 +52,14 @@
          (compile-command (concat "cd " (vc-git-root filename) "; prove -v --nocolor " filename)))
     (call-interactively 'compile)))
 
+;; perl-eval
+(defun perl-eval (beg end)
+  "Run selected region as Perl code"
+  (interactive "r")
+  (save-excursion
+  (shell-command-on-region beg end "perl"))
+)
+
 ;; perldoc -lm した結果を開く
 (defun perl-find-module ()
   (interactive)
