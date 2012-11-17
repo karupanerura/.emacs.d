@@ -23,6 +23,9 @@
 ;; カーソル点滅しないように
 (blink-cursor-mode 0)
 
+;; 時間を表示
+(display-time)
+
 ;; アクティブでないバッファではカーソルを出さない
 (setq cursor-in-non-selected-windows nil)
 
