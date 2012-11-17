@@ -43,11 +43,6 @@
 ;; tramp.el
 (require 'tramp)
 
-;; tempbuf.el
-(require 'tempbuf)
-(add-hook 'dired-mode-hook 'turn-on-tempbuf-mode)
-(add-hook 'find-file-hook 'turn-on-tempbuf-mode)
-
 ;; auto-save-buffers.el
 (require 'auto-save-buffers)
 (run-with-idle-timer 10 t 'auto-save-buffers)
