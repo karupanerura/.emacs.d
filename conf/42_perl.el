@@ -29,7 +29,9 @@
 (custom-set-variables
  '(cperl-indent-parens-as-block t)
  '(cperl-close-paren-offset     -4)
- '(cperl-indent-subs-specially  nil))
+ '(cperl-indent-subs-specially  nil)
+ '(cperl-array-face             'font-lock-variable-name-face)
+ '(cperl-hash-face              'font-variable-name-face))
 
 ;; perl-completion
 ;; (auto-install-from-url "https://raw.github.com/imakado/perl-completion/master/perl-completion.el")
@@ -105,5 +107,9 @@
         (defvar ac-source-my-perl-completion
           '((candidates . plcmp-ac-make-cands)))
         (add-to-list 'ac-sources 'ac-source-my-perl-completion)
-        (add-to-list 'ac-sources 'ac-source-dictionary)))))
+        (add-to-list 'ac-sources 'ac-source-dictionary))))
+  (set-face-italic-p 'cperl-hash-face nil)
+  (set-face-background 'cperl-hash-face nil)
+  (set-face-background 'cperl-array-face nil)
+  (set-face-foreground 'font-lock-function-name-face "magenta4"))
 (add-hook 'cperl-mode-hook 'my-cperl-mode-hook)
