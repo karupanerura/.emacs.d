@@ -118,6 +118,5 @@
         (add-to-list 'ac-sources 'ac-source-dictionary))))
   (set-face-italic-p 'cperl-hash-face nil)
   (set-face-background 'cperl-hash-face nil)
-  (set-face-background 'cperl-array-face nil)
-  (set-face-foreground 'font-lock-function-name-face "magenta4"))
+  (set-face-background 'cperl-array-face nil))
 (add-hook 'cperl-mode-hook 'my-cperl-mode-hook)
