@@ -92,7 +92,7 @@
     ("\\.t$"    flymake-perl-init)))
 (defun flymake-perl-init ()
   (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                     'flymake-create-temp-intemp))
+                     'flymake-create-temp-with-folder-structure))
          (local-file (file-relative-name
                       temp-file
                       (file-name-directory buffer-file-name))))
