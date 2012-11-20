@@ -24,3 +24,6 @@
 
 ;; auto start flymake
 (add-hook 'find-file-hook 'flymake-find-file-hook)
+
+;; flymake-create-temp-inplaceを使わない
+(defalias 'flymake-create-temp-inplace 'flymake-create-temp-with-folder-structure)
