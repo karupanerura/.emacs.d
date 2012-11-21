@@ -47,5 +47,10 @@
 (require 'auto-save-buffers)
 (run-with-idle-timer 10 t 'auto-save-buffers)
 
+;; cua-mode
+(require 'cua-base)
+(cua-mode t)
+(setq cua-enable-cua-keys nil) ; そのままだと C-x が切り取りになってしまったりするので無効化
+
 ;;; gzファイルも編集できるようにする
 (auto-compression-mode t)
