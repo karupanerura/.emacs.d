@@ -52,5 +52,8 @@
 (cua-mode t)
 (setq cua-enable-cua-keys nil) ; そのままだと C-x が切り取りになってしまったりするので無効化
 
+;; C-lで短形選択
+(global-set-key (kbd "C-l") 'cua-set-rectangle-mark)
+
 ;;; gzファイルも編集できるようにする
 (auto-compression-mode t)
