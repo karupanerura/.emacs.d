@@ -21,7 +21,7 @@
 (set-clipboard-coding-system   'utf-8)
 
 ;; find-file-at-point
-(ffap-bindings)
+;; (ffap-bindings)
 
 ;; show parentheses
 (show-paren-mode t)
