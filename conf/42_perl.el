@@ -52,6 +52,16 @@
          (compile-command (concat "cd " (vc-git-root filename) "; prove -v --nocolor " filename)))
     (call-interactively 'compile)))
 
+;; utility
+(defun perl-guess-package ()
+  (let
+      ((filename (buffer-file-name)))
+      (setq filename (cond ((string-match "^.*/site_perl/" filename) (replace-regexp-in-string "^.*/site_perl/" "" filename))
+                       ((string-match "^.*/lib/" filename) (replace-regexp-in-string "^.*/lib/" "" filename))
+                       ((string-match "^.*/5\.[0-9]*\.[0-9]*/" filename) (replace-regexp-in-string "^.*/5\.[0-9]*\.[0-9]*/" "" filename))
+                       (t nil)))
+      (replace-regexp-in-string "\.pm$" "" (replace-regexp-in-string "/" "::" filename))))
+
 ;; perl-eval
 (defun perl-eval (beg end)
   "Run selected region as Perl code"
