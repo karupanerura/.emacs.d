@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: createtable
+# key: createtable
+# --
+CREATE TABLE $1 (
+    id                     INTEGER UNSIGNED   NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    $0
+    created_at             DATETIME           NOT NULL,
+    updated_at             TIMESTAMP          NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin COMMENT='$2';
