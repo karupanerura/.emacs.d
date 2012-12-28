@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: existsor
+# key: existsor
+# --
+exists(\$$1->{$2}) ? (
+    $2 => \$$1->{$2},
+) : (),
