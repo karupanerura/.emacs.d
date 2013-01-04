@@ -56,5 +56,8 @@
 ;; C-lで短形選択
 (global-set-key (kbd "C-l") 'cua-set-rectangle-mark)
 
+;; M-cでコメントアウト
+(global-set-key (kbd "M-c") 'comment-or-uncomment-region)
+
 ;;; gzファイルも編集できるようにする
 (auto-compression-mode t)
