@@ -24,6 +24,11 @@
 (blink-cursor-mode 0)
 
 ;; 時間を表示
+(setq-default display-time-string-forms
+              '(year "-" month "-" day "(" dayname ")"
+                     24-hours ":" minutes
+                     (if mail " Mail" "")))
+(display-time-mode t)
 (display-time)
 
 ;; アクティブでないバッファではカーソルを出さない
