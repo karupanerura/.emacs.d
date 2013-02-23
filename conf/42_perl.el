@@ -3,6 +3,9 @@
 ;; set-perl5lib.el
 (require 'set-perl5lib)
 
+;; plenv.el
+(require 'plenv)
+
 ;; cperl-mode from package-install for cperl-indent-subs-specially
 ;; http://d.hatena.ne.jp/syohex/20120818/1345302707
 ;; (package-install 'cperl-mode)
