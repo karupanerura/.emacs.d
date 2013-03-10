@@ -109,7 +109,7 @@
          (local-file (file-relative-name
                       temp-file
                       (file-name-directory buffer-file-name))))
-    (list "perl" (list "-wc" local-file))))
+    (list (guess-plenv-perl-path) (list "-wc" local-file))))
 
 ;; hook
 (defun my-cperl-mode-hook ()
