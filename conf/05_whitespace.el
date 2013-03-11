@@ -21,7 +21,6 @@
         (space-mark   ?\xE20 [?\xE24] [?_]) ; hard space - currency
         (space-mark   ?\xF20 [?\xF24] [?_]) ; hard space - currency
         (space-mark   ?　    [?□]    [?＿]) ; full-width space - square
-        (newline-mark ?\n    [?\xAB ?\n])   ; eol - right quote mark
         ))
 (setq whitespace-global-modes '(not dired-mode tar-mode))
 (global-whitespace-mode 1)
