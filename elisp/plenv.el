@@ -3,7 +3,7 @@
 ;; Copyright (C) 2012 Kenta Sato
 
 ;; Author: Kenta Sato <karupa@cpan.org>
-;; Version: 0.21
+;; Version: 0.22
 ;; Keywords: Emacs, Perl
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -54,15 +54,15 @@
 (defvar plenv-current-perl-dir nil)
 (defvar plenv-current-perl-path nil)
 
+(defmacro plenv-trim (str)
+  `(replace-regexp-in-string "\n+$" "" ,str))
+
 (defvar plenv-global-perl-path (let ((curr-plenv-version-env (getenv "PLENV_VERSION"))
                                      (result))
                                  (setenv "PLENV_VERSION" "system")
-                                 (setq result (shell-command-to-string "plenv which perl"))
+                                 (setq result (plenv-trim (shell-command-to-string "plenv which perl")))
                                  (setenv "PLENV_VERSION" curr-plenv-version-env)
                                  result))
-
-(defmacro plenv-trim (str)
-  `(replace-regexp-in-string "\n+$" "" ,str))
 
 (defmacro plenv-join (delimiter string-list)
   `(mapconcat 'identity ,string-list ,delimiter))
@@ -110,7 +110,7 @@
     (if (null version) ;; global version
         (setq version (try-get-plenv-global-version)))
     (if (null version) ;; fallback to command
-        (setq version (shell-command-to-string (plenv-command '("version")))))
+        (setq version (plenv-trim (shell-command-to-string (plenv-command '("version"))))))
     version))
 
 (defun guess-plenv-perl-path (&optional pwd)
