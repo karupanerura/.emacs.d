@@ -83,16 +83,13 @@
       (setq end (save-excursion (skip-chars-forward "a-zA-Z0-9_:") (point)))
       (setq module (buffer-substring begin end))
       )
-    (shell-command (concat "perldoc -lm " module) "*perldoc*")
-    (save-window-excursion
-      (switch-to-buffer "*perldoc*")
-      (setq end (point))
-      (setq begin (save-excursion (beginning-of-line) (point)))
-      (setq path-to-module (buffer-substring begin end))
-      )
+    (setq path-to-module
+          (replace-regexp-in-string "\n+$" "" (shell-command-to-string (concat "perldoc -lm " module))))
     (message path-to-module)
-    (find-file path-to-module)
+    (if (file-readable-p path-to-module)
+        (find-file path-to-module))
 ))
+(global-set-key (kbd "C-x p") 'perl-find-module)
 
 ;; flymake for perl
 ;; http://unknownplace.org/memo/2007/12/21#e001
