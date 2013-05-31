@@ -16,3 +16,4 @@
 
 (require 'init-loader)
 (init-loader-load "~/.emacs.d/conf")
+(init-loader-load "~/.emacs.d/conf/local")
