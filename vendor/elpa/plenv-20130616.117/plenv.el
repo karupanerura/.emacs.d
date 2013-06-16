@@ -3,7 +3,8 @@
 ;; Copyright (C) 2012 Kenta Sato
 
 ;; Author: Kenta Sato <karupa@cpan.org>
-;; Version: 0.22
+;; Version: 20130616.117
+;; X-Original-Version: 0.31
 ;; Keywords: Emacs, Perl
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -64,6 +65,14 @@
                                  (setenv "PLENV_VERSION" curr-plenv-version-env)
                                  result))
 
+(defvar plenv-script-version
+  (car (cdr (split-string (plenv-trim (shell-command-to-string "plenv --version")) " "))))
+
+(defvar plenv-script-major-version
+  (string-to-number (substring (replace-regexp-in-string "^v" "" plenv-script-version) 0 3)))
+
+(defvar plenv-list-subcommand (if (<= 1.9 plenv-script-major-version) "versions" "list"))
+
 (defmacro plenv-join (delimiter string-list)
   `(mapconcat 'identity ,string-list ,delimiter))
 
@@ -78,13 +87,19 @@
        (setq ,varname (with-temp-buffer
                         (insert-file-contents ,file)
                         (buffer-string)))))
+
 (defun plenv-perls ()
-  (let* ((perls (split-string (plenv "list")))
-          (valid-perls (remove-if-not
-                       (lambda (i)
-                         (string-match "^\\(perl\\|[0-9]\\)" i))
-                       perls)))
-    (append valid-perls (list "system"))))
+  (let* ((perls (split-string (plenv plenv-list-subcommand)))
+          (valid-perls (mapcar
+                         (lambda (i)
+                           (replace-regexp-in-string " (set by\.\*\$" "" i))
+                       (remove-if-not
+                         (lambda (i)
+                           (string-match "^\\(perl\\|[0-9]\\)" i))
+                       perls))))
+    (if (string-equal plenv-list-subcommand "list")
+        (setq valid-perls (append valid-perls (list "system"))))
+    valid-perls))
 
 (defun try-get-plenv-local-version (pwd)
   (unless (or (null pwd) (string= "" pwd) (string= "/" pwd) (string= "." pwd))
@@ -118,7 +133,7 @@
       (setq pwd default-directory))
   (let ((version (guess-plenv-version pwd)))
     (cond ((string= "system" version) plenv-global-perl-path)
-          (t (format "%s/versions/%s/bin/perl%s" plenv-dir version version)))))
+          (t (format "%s/versions/%s/bin/perl" plenv-dir version)))))
 
 (defun plenv (args)
   (interactive "M$ plenv ")
@@ -130,7 +145,7 @@
 
 (defun plenv-list ()
   (interactive)
-  (shell-command (plenv-command '("list"))))
+  (shell-command (plenv-command (list plenv-list-subcommand))))
 
 (defun plenv-shell (version)
   (interactive (list (completing-read "Version: " (plenv-perls) nil t)))
