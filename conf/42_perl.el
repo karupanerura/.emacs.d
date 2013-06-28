@@ -1,7 +1,5 @@
 ;;; Perl
 (require 'flymake)
-;; set-perl5lib.el
-(require 'set-perl5lib)
 
 ;; plenv.el
 (require 'plenv)
@@ -116,7 +114,6 @@
   (ad-activate 'flymake-post-syntax-check)
   (setq flymake-allowed-file-name-masks (append flymake-allowed-file-name-masks flymake-allowed-perl-file-name-masks))
   (setq flymake-err-line-patterns flymake-perl-err-line-patterns)
-  (set-perl5lib)
   (perl-completion-mode t)
   (flymake-mode t)
   (when (boundp 'auto-complete-mode)
