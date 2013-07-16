@@ -3,8 +3,8 @@
 ;; Copyright (C) 2012 Kenta Sato
 
 ;; Author: Kenta Sato <karupa@cpan.org>
-;; Version: 20130616.117
-;; X-Original-Version: 0.31
+;; Version: 20130707.1516
+;; X-Original-Version: 0.32
 ;; Keywords: Emacs, Perl
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -86,7 +86,7 @@
   `(if (file-readable-p ,file)
        (setq ,varname (with-temp-buffer
                         (insert-file-contents ,file)
-                        (buffer-string)))))
+                        (plenv-trim (buffer-string))))))
 
 (defun plenv-perls ()
   (let* ((perls (split-string (plenv plenv-list-subcommand)))
