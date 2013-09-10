@@ -7,6 +7,6 @@
                                  (c-set-offset 'arglist-intro '+)
                                  (c-set-offset 'topmost-intro-cont '+)
                                  (c-set-offset 'arglist-close 0)
-                                 (setq tab-width 4)
+                                 (setq tab-width 2)
                                  (setq c-basic-offset tab-width)
                                  (setq indent-tabs-mode nil)))
