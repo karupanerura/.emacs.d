@@ -82,7 +82,7 @@
       (setq module (buffer-substring begin end))
       )
     (setq path-to-module
-          (replace-regexp-in-string "\n+$" "" (shell-command-to-string (concat "perldoc -lm " module))))
+          (replace-regexp-in-string "\n+$" "" (shell-command-to-string (concat (guess-plenv-perl-path) "doc" " -lm " module))))
     (message path-to-module)
     (if (file-readable-p path-to-module)
         (find-file path-to-module))
