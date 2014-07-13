@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: existsor
+# key: existsor
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# --
+exists(\$$1->{$2}) ? (
+    $2 => \$$1->{$2},
+) : (),

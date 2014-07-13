@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: use strict; use warnings; use utf8; ....
+# key: usestrict
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# --
+use strict;
+use warnings;
+use utf8;
+
+$0

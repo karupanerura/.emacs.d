@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Data::Validator->new(...)->with(...)
+# key: dv
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# --
+state $v = Data::Validator->new(
+    ${1:...},
+)->with(qw/${2:$$(yas-choose-value '("Method", "Method StrictSequenced"))}/);
+my(${3:\$class, \$args}) = $v->validate(@_);

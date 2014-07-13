@@ -16,10 +16,6 @@
 ;; スクロールバー非表示
 (scroll-bar-mode nil)
 
-;; yascroll.el(from package.el)
-(require 'yascroll)
-(global-yascroll-bar-mode 1)
-
 ;; カーソル点滅しないように
 (blink-cursor-mode 0)
 

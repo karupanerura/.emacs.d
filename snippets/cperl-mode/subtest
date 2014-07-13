@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: subtest "..." => sub { };
+# key: subtest
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# --
+subtest "${1:...}" => sub {
+    $0
+};

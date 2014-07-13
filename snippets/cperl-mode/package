@@ -1,0 +1,47 @@
+# -*- mode: snippet -*-
+# name: package
+# key: package
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# --
+package ${1:$$(perl-guess-package)};
+use strict;
+use warnings;
+use utf8;
+
+$0
+
+1;
+__END__
+
+=pod
+
+=encoding utf-8
+
+=head1 NAME
+
+$1 - ${2:TODO}
+
+=head1 SYNOPSIS
+
+    use $1;
+
+=head1 DESCRIPTION
+
+$2
+
+=head1 SEE ALSO
+
+L<perl>
+
+=head1 LICENSE
+
+Copyright (C) karupanerura.
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=head1 AUTHOR
+
+karupanerura E<lt>karupa@cpan.orgE<gt>
+
+=cut

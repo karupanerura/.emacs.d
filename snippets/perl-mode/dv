@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: Data::Validator->new(...)->with(...)
-# key: dv
-# --
-state $v = Data::Validator->new(
-    ${1:...},
-)->with(qw/${2:Method}/);
-my(${3:\$class, \$args}) = $v->validate(@_);
-

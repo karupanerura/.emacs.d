@@ -116,6 +116,7 @@
   (setq flymake-err-line-patterns flymake-perl-err-line-patterns)
   (perl-completion-mode t)
   (flymake-mode t)
+  (yas-minor-mode)
   (when (boundp 'auto-complete-mode)
     (eval
      '(progn
