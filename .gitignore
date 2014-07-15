@@ -6,3 +6,5 @@ vendor/elpa/archives/melpa
 tramp
 ac-comphist.dat
 eshell
+projectile-bookmarks.eld
+projectile.cache

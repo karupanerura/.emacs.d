@@ -44,20 +44,28 @@
 ;; tramp.el
 (require 'tramp)
 
-;; auto-save-buffers.el
-(require 'auto-save-buffers)
-(run-with-idle-timer 10 t 'auto-save-buffers)
-
 ;; cua-mode
 (require 'cua-base)
 (cua-mode t)
 (setq cua-enable-cua-keys nil) ; そのままだと C-x が切り取りになってしまったりするので無効化
 
 ;; C-lで短形選択
-(global-set-key (kbd "C-l") 'cua-set-rectangle-mark)
+(define-key global-map (kbd "C-l") 'cua-set-rectangle-mark)
 
-;; M-cでコメントアウト
-(global-set-key (kbd "M-c") 'comment-or-uncomment-region)
+;; C-c cでコメントアウト
+(define-key global-map (kbd "C-c c") 'comment-or-uncomment-region)
 
 ;;; gzファイルも編集できるようにする
 (auto-compression-mode t)
+
+;; projectile
+(require 'projectile)
+(custom-set-variables
+ '(projectile-project-root-files
+   '(".projectile"        ; projectile project marker
+     "Gemfile"            ; Bundler file
+     "package.json"       ; npm package file
+     "cpanfile"           ; CPAN dependencies for Perl applications
+     ".git"               ; Git VCS root dir
+     )))
+(projectile-global-mode)

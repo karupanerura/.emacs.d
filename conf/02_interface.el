@@ -2,9 +2,6 @@
 (line-number-mode t)
 (column-number-mode t)
 
-;; フリンジ(左右の折り返し表示領域)はいらない
-(fringe-mode 'none)
-
 ;; 対応する括弧を光らせる
 (show-paren-mode 1)
 
