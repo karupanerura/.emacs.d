@@ -20,7 +20,7 @@
         (space-mark   ?\x920 [?\x924] [?_]) ; hard space - currency
         (space-mark   ?\xE20 [?\xE24] [?_]) ; hard space - currency
         (space-mark   ?\xF20 [?\xF24] [?_]) ; hard space - currency
-        (space-mark   ?　    [?□]    [?＿]) ; full-width space - square
+        (space-mark   ?　    [?　]    [?＿]) ; full-width space - square
         ))
 (setq whitespace-global-modes '(not dired-mode tar-mode))
 (global-whitespace-mode 1)
