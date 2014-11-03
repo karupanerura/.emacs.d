@@ -21,16 +21,16 @@
  '(cperl-close-paren-offset     -4)
  '(cperl-indent-subs-specially  nil))
 
-(defmacro gen-perl-options ()
-  `(let ((options '()))
-     (when (projectile-project-p)
-       (push (concat "-I" (projectile-project-root)) options)
-       (push (concat "-I" (projectile-expand-root "lib")) options)
-       (push (concat "-I" (projectile-expand-root "site_perl")) options)
-       (when (projectile-verify-file "cpanfile")
-         (push (concat "-I" (projectile-expand-root "local/lib/perl5")) options))
-       options)
-     options))
+(defun gen-perl-options ()
+  (let ((options '()))
+    (when (projectile-project-p)
+      (push (concat "-I" (projectile-project-root)) options)
+      (push (concat "-I" (projectile-expand-root "lib")) options)
+      (push (concat "-I" (projectile-expand-root "site_perl")) options)
+      (when (projectile-verify-file "cpanfile")
+        (push (concat "-I" (projectile-expand-root "local/lib/perl5")) options))
+      options)
+    options))
 
 ;; commands
 (defun perl-run-prove ()
@@ -60,15 +60,18 @@
 (defun perl-find-module ()
   (interactive)
   (let
-      (end begin module path-to-module)
+      (end begin module perldoc-path command path-to-module)
     (save-excursion
       (setq begin (save-excursion (skip-chars-backward "a-zA-Z0-9_:") (point)))
       (setq end (save-excursion (skip-chars-forward "a-zA-Z0-9_:") (point)))
-      (setq module (buffer-substring begin end))
-      )
+      (setq module (buffer-substring begin end)))
+    (setq perldoc-path
+          (replace-regexp-in-string "\n+$" "" (shell-command-to-string "plenv which perldoc")))
+    (setq command
+          (mapconcat 'identity (append (cons "perl" (gen-perl-options))
+                                       (list perldoc-path "-lm" module)) " "))
     (setq path-to-module
-          (replace-regexp-in-string "\n+$" "" (shell-command-to-string (concat "perldoc" " -lm " module))))
-    (message path-to-module)
+          (replace-regexp-in-string "\n+$" "" (shell-command-to-string command)))
     (if (file-readable-p path-to-module)
         (find-file path-to-module))))
 
@@ -96,7 +99,9 @@
      ;; flycheck
      (flycheck-define-checker my-perl
        "A Perl syntax checker using the Perl interpreter."
-       :command ("perl" "-w" "-c" source)
+       :command ("perl" "-w" "-c"
+                 (eval (gen-perl-options))
+                 source)
        :error-patterns ((error line-start (minimal-match (message)) " at " (file-name) " line " line (or "." (and ", " (zero-or-more not-newline))) line-end))
        :modes (perl-mode cperl-mode)
        :next-checkers (my-perl-perlcritic))
