@@ -34,8 +34,5 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 
-;; recenf-mode
-(recentf-mode t)
-
 ;; 問い合わせを簡略化 yes/no を y/n
 (defalias 'yes-or-no-p 'y-or-n-p)

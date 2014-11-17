@@ -28,11 +28,17 @@
 ;; 一行ずつスクロール
 (setq scroll-step 1)
 
+;; バッファの自動再読み込み
+(global-auto-revert-mode 1)
+
 ;; align.el
 (require 'align)
 
 ;; tramp.el
 (require 'tramp)
+
+;; midnight.el
+(require 'midnight)
 
 ;; cua-mode
 (require 'cua-base)
