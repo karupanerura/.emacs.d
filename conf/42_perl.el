@@ -101,7 +101,7 @@
        "A Perl syntax checker using the Perl interpreter."
        :command ("perl" "-w" "-c"
                  (eval (gen-perl-options))
-                 source)
+                 source-original)
        :error-patterns ((error line-start (minimal-match (message)) " at " (file-name) " line " line (or "." (and ", " (zero-or-more not-newline))) line-end))
        :modes (perl-mode cperl-mode)
        :next-checkers (my-perl-perlcritic))
