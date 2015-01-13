@@ -10,6 +10,9 @@
  '(file-name-coding-system  'utf-8)         ; file-name-coding-system
  '(default-input-method 'japanese-anthy))   ; default-input-method
 
+;; editorconfig
+(load "editorconfig")
+
 ;; find-file-at-point
 ;; (ffap-bindings)
 
