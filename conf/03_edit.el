@@ -31,6 +31,9 @@
 ;; 一行ずつスクロール
 (setq scroll-step 1)
 
+;; loclfileを作らない
+(setq create-lockfiles nil)
+
 ;; バッファの自動再読み込み
 (global-auto-revert-mode 1)
 
