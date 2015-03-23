@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "auto-complete" "../../../../../../../../home/k-sato/.emacs.d/vendor/elpa/auto-complete-20141103.105/auto-complete.el"
-;;;;;;  "3f0f7b44063489e12887cd1fe62a9292")
-;;; Generated autoloads from ../../../../../../../../home/k-sato/.emacs.d/vendor/elpa/auto-complete-20141103.105/auto-complete.el
+;;;### (autoloads nil "auto-complete" "../../../../../.emacs.d/vendor/elpa/auto-complete-20150322.813/auto-complete.el"
+;;;;;;  "fd29aa8b7a84fba271f8571966405419")
+;;; Generated autoloads from ../../../../../.emacs.d/vendor/elpa/auto-complete-20150322.813/auto-complete.el
 
 (autoload 'auto-complete "auto-complete" "\
 Start auto-completion at current point.
@@ -40,9 +40,9 @@ See `auto-complete-mode' for more information on Auto-Complete mode.
 
 ;;;***
 
-;;;### (autoloads nil "auto-complete-config" "../../../../../../../../home/k-sato/.emacs.d/vendor/elpa/auto-complete-20141103.105/auto-complete-config.el"
-;;;;;;  "4b85604161aa7c344fac4c04e6c89d0d")
-;;; Generated autoloads from ../../../../../../../../home/k-sato/.emacs.d/vendor/elpa/auto-complete-20141103.105/auto-complete-config.el
+;;;### (autoloads nil "auto-complete-config" "../../../../../.emacs.d/vendor/elpa/auto-complete-20150322.813/auto-complete-config.el"
+;;;;;;  "205b49128f4fe43282d93f05c5384575")
+;;; Generated autoloads from ../../../../../.emacs.d/vendor/elpa/auto-complete-20150322.813/auto-complete-config.el
 
 (autoload 'ac-config-default "auto-complete-config" "\
 
@@ -51,11 +51,11 @@ See `auto-complete-mode' for more information on Auto-Complete mode.
 
 ;;;***
 
-;;;### (autoloads nil nil ("../../../../../../../../home/k-sato/.emacs.d/vendor/elpa/auto-complete-20141103.105/auto-complete-autoloads.el"
-;;;;;;  "../../../../../../../../home/k-sato/.emacs.d/vendor/elpa/auto-complete-20141103.105/auto-complete-config.el"
-;;;;;;  "../../../../../../../../home/k-sato/.emacs.d/vendor/elpa/auto-complete-20141103.105/auto-complete-pkg.el"
-;;;;;;  "../../../../../../../../home/k-sato/.emacs.d/vendor/elpa/auto-complete-20141103.105/auto-complete.el")
-;;;;;;  (21597 49435 519787 35000))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/vendor/elpa/auto-complete-20150322.813/auto-complete-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/vendor/elpa/auto-complete-20150322.813/auto-complete-config.el"
+;;;;;;  "../../../../../.emacs.d/vendor/elpa/auto-complete-20150322.813/auto-complete-pkg.el"
+;;;;;;  "../../../../../.emacs.d/vendor/elpa/auto-complete-20150322.813/auto-complete.el")
+;;;;;;  (21775 51792 994406 0))
 
 ;;;***
 

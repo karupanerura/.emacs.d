@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "swift-mode" "../../../../../.emacs.d/vendor/elpa/swift-mode-20141204.2338/swift-mode.el"
-;;;;;;  "273af15fce4863d874f70005aaf7c7be")
-;;; Generated autoloads from ../../../../../.emacs.d/vendor/elpa/swift-mode-20141204.2338/swift-mode.el
+;;;### (autoloads nil "swift-mode" "../../../../../.emacs.d/vendor/elpa/swift-mode-20150223.6/swift-mode.el"
+;;;;;;  "2bb02ec379439b513ad426e3c56a67d1")
+;;; Generated autoloads from ../../../../../.emacs.d/vendor/elpa/swift-mode-20150223.6/swift-mode.el
 
 (autoload 'swift-mode-run-repl "swift-mode" "\
 Run a REPL process, input and output via buffer `*swift-repl*'.
@@ -30,9 +30,9 @@ Major mode for Apple's Swift programming language.
 
 ;;;***
 
-;;;### (autoloads nil nil ("../../../../../.emacs.d/vendor/elpa/swift-mode-20141204.2338/swift-mode-autoloads.el"
-;;;;;;  "../../../../../.emacs.d/vendor/elpa/swift-mode-20141204.2338/swift-mode.el")
-;;;;;;  (21659 34016 703998 0))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/vendor/elpa/swift-mode-20150223.6/swift-mode-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/vendor/elpa/swift-mode-20150223.6/swift-mode.el")
+;;;;;;  (21775 51743 185601 0))
 
 ;;;***
 
