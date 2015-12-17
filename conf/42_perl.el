@@ -114,10 +114,9 @@
                         (warning line-start (file-name) ":" line ":" column ":" (any "234") ":" (message) line-end)
                         (error   line-start (file-name) ":" line ":" column ":" (any "5")   ":" (message) line-end))
        :modes (cperl-mode perl-mode))
-
-     ;; faces
      (set-face-attribute 'cperl-array-face nil
-                         :background nil :weight 'normal)
+                         :background nil
+                         :weight 'normal :italic nil)
      (set-face-attribute 'cperl-hash-face nil
                          :foreground "DarkOliveGreen3"
                          :background nil
@@ -133,5 +132,12 @@
   (perl-completion-mode t)
   (yas-minor-mode t)
   (add-to-list 'flycheck-checkers 'my-perl)
-  (add-to-list 'flycheck-checkers 'my-perl-perlcritic))
+  (add-to-list 'flycheck-checkers 'my-perl-perlcritic)
+  (set-face-attribute 'cperl-array-face nil
+                      :background nil
+                      :weight 'normal :italic nil)
+  (set-face-attribute 'cperl-hash-face nil
+                      :foreground "DarkOliveGreen3"
+                      :background nil
+                      :weight 'normal :italic nil))
 (add-hook 'cperl-mode-hook 'my-cperl-mode-hook)
