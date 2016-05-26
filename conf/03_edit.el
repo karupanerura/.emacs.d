@@ -13,6 +13,15 @@
 ;; editorconfig
 (load "editorconfig")
 
+;; auto-complete
+(require 'auto-complete)
+(require 'auto-complete-config)
+(ac-config-default)
+
+;; auto-complete-etags
+(require 'auto-complete-etags)
+(add-to-list 'ac-sources 'ac-source-etags)
+
 ;; find-file-at-point
 ;; (ffap-bindings)
 
