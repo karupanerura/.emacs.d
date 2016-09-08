@@ -3,6 +3,7 @@ auto-save-list
 vendor/elpa/archives/gnu/archive-contents
 vendor/elpa/archives/marmalade/archive-contents
 vendor/elpa/archives/melpa
+vendor/elpa/archives/gnu/archive-contents.signed
 tramp
 ac-comphist.dat
 eshell
