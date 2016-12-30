@@ -27,6 +27,7 @@
       (push (concat "-I" (projectile-project-root)) options)
       (push (concat "-I" (projectile-expand-root "lib")) options)
       (push (concat "-I" (projectile-expand-root "site_perl")) options)
+      (push (concat "-I" (projectile-expand-root "t/lib")) options)
       (when (projectile-verify-file "cpanfile")
         (push (concat "-I" (projectile-expand-root "local/lib/perl5")) options))
       options)
