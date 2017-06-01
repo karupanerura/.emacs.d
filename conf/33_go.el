@@ -1,14 +1,9 @@
 ;; go-mode(from package.el)
 (require 'go-mode)
-(require 'go-mode-load)
 (add-to-list 'auto-mode-alist '("\\.go$" . go-mode))
 
 (require 'go-autocomplete)
 (add-to-list 'ac-modes 'go-mode)
-
-;; goflymake
-(require 'go-flymake)
-(setenv "GOPATH" (expand-file-name "~/.go"))
 
 ;; go-eldoc
 (require 'go-eldoc)
@@ -26,4 +21,4 @@
              (local-set-key (kbd "M-.") 'godef-jump)
              (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)
              (local-set-key (kbd "C-c a") 'go-import-add)
-             (local-set-key (kbd "C-c d") 'godoc)))
+             (local-set-key (kbd "C-c C-d") 'godoc)))
