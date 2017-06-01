@@ -25,7 +25,7 @@
      (define-key cperl-mode-map (kbd "C-m") 'newline-and-indent)
      (define-key cperl-mode-map (kbd "C-c t") 'perl-run-prove)
      (define-key cperl-mode-map (kbd "C-c C-j") 'perl-find-module)
-     (define-key cperl-mode-map (kbd "C-c C-d") 'helm-perldxoc)
+     (define-key cperl-mode-map (kbd "C-c C-d") 'helm-perldoc)
 
      (custom-set-faces
       '(cperl-array-face ((t (:background nil :foreground "blue"))))
