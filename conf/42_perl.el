@@ -16,10 +16,39 @@
 (add-to-list 'auto-mode-alist '("\\.psgi$" . cperl-mode))
 (add-to-list 'auto-mode-alist '("cpanfile" . cperl-mode))
 
-(custom-set-variables
- '(cperl-indent-parens-as-block t)
- '(cperl-close-paren-offset     -4)
- '(cperl-indent-subs-specially  nil))
+(eval-after-load "cperl-mode"
+  '(progn
+     ;; helm-perldoc
+     (helm-perldoc:setup)
+
+     ;; key binding
+     (define-key cperl-mode-map (kbd "C-m") 'newline-and-indent)
+     (define-key cperl-mode-map (kbd "C-c t") 'perl-run-prove)
+     (define-key cperl-mode-map (kbd "C-c C-j") 'perl-find-module)
+     (define-key cperl-mode-map (kbd "C-c C-d") 'helm-perldxoc)
+
+     (custom-set-faces
+      '(cperl-array-face ((t (:background nil :foreground "blue"))))
+      '(cperl-hash-face ((t (:background nil :foreground "DarkOliveGreen3")))))
+
+     (custom-set-variables
+      '(cperl-indent-parens-as-block               t)
+      '(cperl-close-paren-offset                   -4)
+      '(cperl-indent-level                         4)
+      '(cperl-continued-statement-offset           4)
+      '(cperl-indent-subs-specially                nil)
+      '(cperl-tab-always-indent                    nil)
+      '(cperl-highlight-variables-indiscriminately t))
+
+     ;; flycheck
+     (flycheck-define-checker my-perl
+       "A Perl syntax checker using the Perl interpreter."
+       :command ("perl" "-w" "-c"
+                 (eval (gen-perl-options))
+                 source-original)
+       :error-patterns ((error line-start (minimal-match (message)) " at " (file-name) " line " line (or "." (and ", " (zero-or-more not-newline))) line-end))
+       :modes (perl-mode cperl-mode))
+     (add-to-list 'flycheck-checkers 'my-perl)))
 
 (defun gen-perl-options ()
   (let ((options '()))
@@ -85,60 +114,16 @@
      (add-to-list 'ac-sources 'ac-source-my-perl-completion)
      (add-to-list 'ac-sources 'ac-source-dictionary)))
 
-(eval-after-load "cperl-mode"
-  '(progn
-     (cperl-set-style "PerlStyle")
-
-     ;; helm-perldoc
-     (helm-perldoc:setup)
-
-     ;; key binding
-     (define-key cperl-mode-map (kbd "C-m") 'newline-and-indent)
-     (define-key cperl-mode-map (kbd "C-c t") 'perl-run-prove)
-     (define-key cperl-mode-map (kbd "C-x p") 'perl-find-module)
-
-     ;; flycheck
-     (flycheck-define-checker my-perl
-       "A Perl syntax checker using the Perl interpreter."
-       :command ("perl" "-w" "-c"
-                 (eval (gen-perl-options))
-                 source-original)
-       :error-patterns ((error line-start (minimal-match (message)) " at " (file-name) " line " line (or "." (and ", " (zero-or-more not-newline))) line-end))
-       :modes (perl-mode cperl-mode)
-       :next-checkers (my-perl-perlcritic))
-     (flycheck-define-checker my-perl-perlcritic
-       "A Perl syntax checker using Perl::Critic."
-       :command ("perlcritic" "--no-color" "--verbose" "%f:%l:%c:%s:%m (%e)\n"
-                 (option "--severity" flycheck-perlcritic-verbosity flycheck-option-int)
-                 source-original)
-       :error-patterns ((info    line-start (file-name) ":" line ":" column ":" (any "1")   ":" (message) line-end)
-                        (warning line-start (file-name) ":" line ":" column ":" (any "234") ":" (message) line-end)
-                        (error   line-start (file-name) ":" line ":" column ":" (any "5")   ":" (message) line-end))
-       :modes (cperl-mode perl-mode))
-     (set-face-attribute 'cperl-array-face nil
-                         :background nil
-                         :weight 'normal :italic nil)
-     (set-face-attribute 'cperl-hash-face nil
-                         :foreground "DarkOliveGreen3"
-                         :background nil
-                         :weight 'normal :italic nil)))
-
 ;; hook
 (autoload 'helm-perldoc:carton-setup "helm-perldoc" nil t)
 (autoload 'flycheck-select-checker "flycheck" nil t)
 (defun my-cperl-mode-hook ()
   "Hook function for `cperl-mode'."
   (helm-perldoc:carton-setup)
+
+  ;; flycheck
   (flycheck-select-checker 'my-perl)
+
   (perl-completion-mode t)
-  (yas-minor-mode t)
-  (add-to-list 'flycheck-checkers 'my-perl)
-  (add-to-list 'flycheck-checkers 'my-perl-perlcritic)
-  (set-face-attribute 'cperl-array-face nil
-                      :background nil
-                      :weight 'normal :italic nil)
-  (set-face-attribute 'cperl-hash-face nil
-                      :foreground "DarkOliveGreen3"
-                      :background nil
-                      :weight 'normal :italic nil))
+  (yas-minor-mode t))
 (add-hook 'cperl-mode-hook 'my-cperl-mode-hook)

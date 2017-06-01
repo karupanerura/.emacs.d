@@ -1,5 +1,6 @@
 ;; go-mode(from package.el)
 (require 'go-mode)
+(require 'go-mode-load)
 (add-to-list 'auto-mode-alist '("\\.go$" . go-mode))
 
 (require 'go-autocomplete)
@@ -13,6 +14,9 @@
 (require 'go-eldoc)
 (add-hook 'go-mode-hook 'go-eldoc-setup)
 
+;; auto goimports
+(setq gofmt-command "goimports")
+(add-hook 'before-save-hook 'gofmt-before-save)
 
 ;; key-binds
 (add-hook 'go-mode-hook
