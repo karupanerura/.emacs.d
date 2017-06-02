@@ -37,7 +37,7 @@
       '(cperl-indent-level                         4)
       '(cperl-continued-statement-offset           4)
       '(cperl-indent-subs-specially                nil)
-      '(cperl-tab-always-indent                    nil)
+      '(cperl-tab-always-indent                    t)
       '(cperl-highlight-variables-indiscriminately t))
 
      ;; flycheck
