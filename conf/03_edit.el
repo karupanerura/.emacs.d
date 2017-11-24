@@ -25,6 +25,10 @@
 ;; find-file-at-point
 ;; (ffap-bindings)
 
+;; editorconfig
+(require 'editorconfig)
+(editorconfig-mode 1)
+
 ;; show parentheses
 (show-paren-mode t)
 

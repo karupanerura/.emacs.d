@@ -28,8 +28,12 @@
  '(coffee-args-compile (quote ("-c" "--bare")))
  '(coffee-tab-width 2)
  '(cperl-close-paren-offset -4)
+ '(cperl-continued-statement-offset 4)
+ '(cperl-highlight-variables-indiscriminately t)
+ '(cperl-indent-level 4)
  '(cperl-indent-parens-as-block t)
  '(cperl-indent-subs-specially nil)
+ '(cperl-tab-always-indent t)
  '(default-input-method (quote japanese-anthy))
  '(delete-auto-save-files t)
  '(dired-use-ls-dired nil)
@@ -42,7 +46,7 @@
  '(markdown-command-needs-filename t)
  '(package-selected-packages
    (quote
-    (go-eldoc go-autocomplete go-mode magit yasnippet vue-html-mode flycheck flycheck-rust flycheck-swift rust-mode zencoding-mode yaxception yaml-mode yagist tt-mode swift-mode ssh-config-mode scss-mode scala-mode2 sass-mode python-mode pod-mode plenv php-mode perl-completion packed nginx-mode markdown-mode lua-mode log4e less-css-mode kolon-mode jsx-mode init-loader helm-projectile helm-perldoc helm-go-package groovy-mode gradle-mode fuzzy editorconfig dockerfile-mode docker-tramp docker cperl-mode coffee-mode auto-save-buffers-enhanced auto-install auto-complete-exuberant-ctags auto-complete-etags auto-complete-c-headers auto-async-byte-compile ac-js2 ac-helm)))
+    (editorconfig-charset-extras go-gen-test go-impl go-projectile flycheck-perl6 perl6-mode vue-mode d-mode go-eldoc go-autocomplete go-mode magit yasnippet vue-html-mode flycheck flycheck-rust flycheck-swift rust-mode zencoding-mode yaxception yaml-mode yagist tt-mode swift-mode ssh-config-mode scss-mode scala-mode2 sass-mode python-mode pod-mode plenv php-mode perl-completion packed nginx-mode markdown-mode lua-mode log4e less-css-mode kolon-mode jsx-mode init-loader helm-projectile helm-perldoc helm-go-package groovy-mode gradle-mode fuzzy editorconfig dockerfile-mode docker-tramp docker cperl-mode coffee-mode auto-save-buffers-enhanced auto-install auto-complete-exuberant-ctags auto-complete-etags auto-complete-c-headers auto-async-byte-compile ac-js2 ac-helm)))
  '(projectile-project-root-files
    (quote
     (".projectile" "Gemfile" "package.json" "cpanfile" ".git")))
@@ -56,4 +60,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(cperl-array-face ((t (:background nil :foreground "blue"))))
+ '(cperl-hash-face ((t (:background nil :foreground "DarkOliveGreen3")))))

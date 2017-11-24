@@ -1,5 +1,6 @@
 ;; js2-mode(from package.el)
 (autoload 'js2-mode "js2-mode" nil t)
+(defalias 'js-mode 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
 
