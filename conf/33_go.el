@@ -2,8 +2,9 @@
 (require 'go-mode)
 (add-to-list 'auto-mode-alist '("\\.go$" . go-mode))
 
-(require 'go-autocomplete)
-(add-to-list 'ac-modes 'go-mode)
+;; company-go
+(require 'company-go)
+
 
 ;; go-eldoc
 (require 'go-eldoc)
@@ -18,6 +19,8 @@
           '(lambda()
              (setq c-basic-offset 4)
              (setq indent-tabs-mode t)
+             (set (make-local-variable 'company-backends) '(company-go))
+             (company-mode)
              (local-set-key (kbd "M-.") 'godef-jump)
              (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)
              (local-set-key (kbd "C-c a") 'go-import-add)
