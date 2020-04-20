@@ -3,5 +3,7 @@
 
 (add-hook 'js-mode-hook
 	  '(lambda()
-	     (setq tab-width 2)))
+             (setq js-indent-level 2)
+             (setq js-expr-indent-offset 2)
+             (setq indent-tabs-mode nil)))
 
