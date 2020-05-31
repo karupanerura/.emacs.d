@@ -46,7 +46,7 @@
  '(markdown-command-needs-filename t)
  '(package-selected-packages
    (quote
-    (add-node-modules-path crystal-mode flycheck-crystal editorconfig-charset-extras go-gen-test go-impl go-projectile flycheck-perl6 d-mode go-eldoc go-autocomplete magit flycheck-rust flycheck-swift scala-mode2 pod-mode plenv php-mode perl-completion packed nginx-mode markdown-mode lua-mode log4e less-css-mode kolon-mode jsx-mode init-loader helm-projectile helm-perldoc helm-go-package groovy-mode fuzzy editorconfig dockerfile-mode docker-tramp docker cperl-mode coffee-mode auto-save-buffers-enhanced auto-install auto-complete-exuberant-ctags auto-complete-etags auto-complete-c-headers auto-async-byte-compile ac-js2 ac-helm)))
+    (eslint-fix add-node-modules-path crystal-mode flycheck-crystal editorconfig-charset-extras go-gen-test go-impl go-projectile flycheck-perl6 d-mode go-eldoc go-autocomplete magit flycheck-rust flycheck-swift scala-mode2 pod-mode plenv php-mode perl-completion packed nginx-mode markdown-mode lua-mode log4e less-css-mode kolon-mode jsx-mode init-loader helm-projectile helm-perldoc helm-go-package groovy-mode fuzzy editorconfig dockerfile-mode docker-tramp docker cperl-mode coffee-mode auto-save-buffers-enhanced auto-install auto-complete-exuberant-ctags auto-complete-etags auto-complete-c-headers auto-async-byte-compile ac-js2 ac-helm)))
  '(projectile-project-root-files
    (quote
     (".projectile" "Gemfile" "package.json" "cpanfile" ".git")))
