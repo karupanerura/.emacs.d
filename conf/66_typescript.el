@@ -12,7 +12,7 @@
             (tide-setup)
             (flycheck-mode t)
             (add-node-modules-path)
-            (flycheck-select-checker 'javascript-eslint)
+            (flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)
             (setq flycheck-check-syntax-automatically '(save mode-enabled))
             (eldoc-mode t)
             (add-hook 'after-save-hook 'eslint-fix nil t)
